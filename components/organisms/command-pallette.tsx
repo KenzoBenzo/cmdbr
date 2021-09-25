@@ -17,9 +17,9 @@ import {
 	CommandGroup,
 } from "cmdk";
 import { DialogRoot } from "@components/molecules/dialog";
-import { DialogContent } from "@radix-ui/react-dialog";
 import { useRouter } from "next/router";
 import tinykeys from "@lib/tinykeys";
+import { Button } from "@components/atoms/button";
 
 const CommandData = createContext({});
 const useCommandData = () => useContext(CommandData);
@@ -54,22 +54,50 @@ const CommandMenu = memo(() => {
 		};
 	}, [keymap]);
 
-	useEffect(() => {
-		setPages([DefaultItems]);
-	}, [setPages]);
+	// useEffect(() => {
+	// 	setPages([DefaultItems]);
+	// }, [setPages]);
 
 	return (
 		<>
 			{/* Dialog */}
+			<Button variant="ghostViolet" onClick={() => setOpen(!open)}>
+				⌘+k or Click me
+			</Button>
 			<DialogRoot open={open} onOpenChange={setOpen}>
 				<Command {...commandProps} ref={commandRef}>
 					<CommandInput placeholder="Type a command or search..." />
 
-					{/* @ts-ignore */}
 					<div ref={heightRef}>
 						<CommandList ref={listRef}>
 							<CommandData.Provider value={{ pages, search, setPages, keymap }}>
-								<Items />
+								<Item value="Themes" keybind="t" closeOnCallback={false} />
+
+								<Group title="Collection">
+									<Item value="Reading" keybind="g r" />
+									<Item value="Design" keybind="g d" />
+									<Item value="Keyboards" keybind="g k" />
+									<Item value="Music" keybind="g m" />
+									<Item value="Projects" keybind="g p" />
+									<Item value="Quotes" keybind="g q" />
+									<Item value="Words" keybind="g w" />
+									<Item value="Ideas" keybind="g i" />
+								</Group>
+
+								<Group title="Navigation">
+									<Item value="Home" keybind="g h" />
+									<Item value="Contact" keybind="g c" />
+								</Group>
+
+								<Group title="Social">
+									<Item
+										value="GitHub"
+										callback={() =>
+											window.open("https://github.com/pacocoursey", "_blank")
+										}
+									/>
+									<Item value="Twitter" keybind="g t" />
+								</Group>
 							</CommandData.Provider>
 						</CommandList>
 					</div>
@@ -145,42 +173,5 @@ const Label = ({ title }: { title: string }) => {
 const Group = ({ children, title }) => {
 	return (
 		<CommandGroup heading={<Label title={title} />}>{children}</CommandGroup>
-	);
-};
-
-const DefaultItems = () => {
-	// const router = useRouter();
-	// const { setPages, pages } = useCommandData();
-
-	return (
-		<>
-			<Item value="Themes" keybind="t" closeOnCallback={false} />
-
-			<Group title="Collection">
-				<Item value="Reading" keybind="g r" />
-				<Item value="Design" keybind="g d" />
-				<Item value="Keyboards" keybind="g k" />
-				<Item value="Music" keybind="g m" />
-				<Item value="Projects" keybind="g p" />
-				<Item value="Quotes" keybind="g q" />
-				<Item value="Words" keybind="g w" />
-				<Item value="Ideas" keybind="g i" />
-			</Group>
-
-			<Group title="Navigation">
-				<Item value="Home" keybind="g h" />
-				<Item value="Contact" keybind="g c" />
-			</Group>
-
-			<Group title="Social">
-				<Item
-					value="GitHub"
-					callback={() =>
-						window.open("https://github.com/pacocoursey", "_blank")
-					}
-				/>
-				<Item value="Twitter" keybind="g t" />
-			</Group>
-		</>
 	);
 };

@@ -1,36 +1,42 @@
 import { styled } from "@stitches/react";
 
-export const Button = styled("button", {
+const StyledButton = styled("button", {
 	all: "unset",
+	fontFamily: "$system",
 	display: "inline-flex",
 	alignItems: "center",
 	justifyContent: "center",
-	borderRadius: 4,
-	padding: "0 15px",
-	fontSize: 15,
-	lineHeight: 1,
+	borderRadius: "$md",
+	padding: "$3 $4",
+	lineHeight: "$base",
 	fontWeight: 500,
-	height: 35,
 
 	variants: {
 		variant: {
-			ghostIndigo: {
+			ghostViolet: {
+				backgroundColor: "$violet3",
+				color: "$violet11",
+				boxShadow: `0 2px 10px $blackA7`,
+				"&:hover": { backgroundColor: "$violet4" },
+				"&:focus": { backgroundColor: "$violet5" },
+			},
+			violet: {
 				backgroundColor: "$violet9",
 				color: "white",
 				boxShadow: `0 2px 10px $blackA7`,
 				"&:hover": { backgroundColor: "$violet10" },
-				// "&:focus": { boxShadow: `0 0 0 2px black` },
+				"&:focus": { backgroundColor: "$violet11" },
 			},
-			// green: {
-			// 	backgroundColor: green.green4,
-			// 	color: green.green11,
-			// 	"&:hover": { backgroundColor: green.green5 },
-			// 	"&:focus": { boxShadow: `0 0 0 2px ${green.green7}` },
-			// },
 		},
 	},
 
 	defaultVariants: {
-		variant: "ghostIndigo",
+		variant: "violet",
 	},
 });
+
+export const Button = ({ children, variant, ...props }) => (
+	<StyledButton variant={variant} {...props}>
+		{children}
+	</StyledButton>
+);

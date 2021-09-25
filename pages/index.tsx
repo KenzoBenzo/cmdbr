@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { styled } from "../stitches.config";
 import { CommandBarLogo } from "../components/commandbar-logo";
-import Dialog from "@components/molecules/dialog";
 import CommandMenu from "@components/organisms/command-pallette";
 
 const Box = styled("div", {});
@@ -46,7 +45,6 @@ export default function Home() {
 					For more information on installing, visit{" "}
 					<Link href="https://www.commandbar.com/">CommandBar.com</Link>.
 				</Text>
-				<Dialog />
 				<CommandMenu />
 			</Container>
 		</Box>

@@ -2,41 +2,7 @@ import React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { keyframes, styled } from "@stitches/react";
 import { Cross2Icon } from "@radix-ui/react-icons";
-
-const Button = styled("button", {
-	all: "unset",
-	fontFamily: "$system",
-	display: "inline-flex",
-	alignItems: "center",
-	justifyContent: "center",
-	borderRadius: "$md",
-	padding: "$3 $4",
-	lineHeight: "$base",
-	fontWeight: 500,
-
-	variants: {
-		variant: {
-			ghostViolet: {
-				backgroundColor: "$violet3",
-				color: "$violet11",
-				boxShadow: `0 2px 10px $blackA7`,
-				"&:hover": { backgroundColor: "$violet4" },
-				"&:focus": { backgroundColor: "$violet5" },
-			},
-			violet: {
-				backgroundColor: "$violet9",
-				color: "white",
-				boxShadow: `0 2px 10px $blackA7`,
-				"&:hover": { backgroundColor: "$violet10" },
-				"&:focus": { backgroundColor: "$violet11" },
-			},
-		},
-	},
-
-	defaultVariants: {
-		variant: "violet",
-	},
-});
+import { Button } from "@components/atoms/button";
 
 const IconButton = styled("button", {
 	all: "unset",
